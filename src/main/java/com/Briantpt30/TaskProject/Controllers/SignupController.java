@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("login")
-public class LoginController {
+@RequestMapping("signup")
+public class SignupController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model){
-        model.addAttribute("title", "Login");
-        return "login";
+
+        return "signup";
     }
 }
