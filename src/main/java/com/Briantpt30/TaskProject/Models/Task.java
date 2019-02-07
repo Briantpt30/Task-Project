@@ -1,10 +1,10 @@
 package com.Briantpt30.TaskProject.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Task {
@@ -19,6 +19,17 @@ public class Task {
 
     @NotNull
     private String description;
+
+    @OneToMany
+    @JoinColumn(name = "task_id")
+    private List<Todos> todos = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "task_id")
+    private List<Comments> comments = new ArrayList<>();
+
+    @ManyToOne
+    private Project project;
 
 
     public Task() {

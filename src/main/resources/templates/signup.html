@@ -2,7 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1>Signup page</h1>
+<nav th:replace="fragments :: nav"></nav>
+<form method="post">
+    <div class="form-group">
+        <label class="col-form-label" th:for="fname">First Name</label>
+        <input type="text" class="form-control" placeholder="Harry" id="fname" th:field="${fname}">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" th:for="lname">Last Name</label>
+        <input type="text" class="form-control" placeholder="Potter" id="lname" th:field="${lname}">
+    </div>
+    <div class="form-group">
+        <label th:for="email">Email address</label>
+        <input type="email" th:field="${email}" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Hpotter@Hogwarts.edu">
+    </div>
+    <div class="form-group">
+        <label th:for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" th:field="${password}">
+    </div>
+    <input type="submit" class="btn btn-primary btn-lg" value="Signup!"/>
+
+</form>
 
 </body>
 </html>
