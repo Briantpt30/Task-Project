@@ -26,21 +26,51 @@ public class User {
     @NotNull
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
     private List<Project> projects = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users")
-    private List<Group> groups;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "users")
+    private List<Group> groups = new ArrayList<>();
 
     public User() {
     }
     public User(String fname, String lname, String email, String password){
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.password = password;
 
+    }
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
         return id;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
     }
 
     public String getFname() {

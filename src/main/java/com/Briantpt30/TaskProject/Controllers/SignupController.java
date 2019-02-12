@@ -20,7 +20,7 @@ public class SignupController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model){
-        model.addAttribute("title", "Signup");
+        model.addAttribute("title", "Signup to TuDu!");
         model.addAttribute(new User());
 
         return "signup";
@@ -28,12 +28,12 @@ public class SignupController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String indexPost(Model model, @ModelAttribute @Valid User newUser){
 
-        model.addAttribute("title", "Signup to TuDu!");
 
         userDao.save(newUser);
+
         model.addAttribute("user", newUser);
 
-        return "redirect: userPage";
+        return "redirect:userpage/" + newUser.getId();
 
     }
 

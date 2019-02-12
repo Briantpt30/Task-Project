@@ -19,10 +19,12 @@ public class Project {
     @JoinColumn(name = "project_id")
     private List<Task> tasks = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
     private Group group;
 
 
@@ -35,6 +37,30 @@ public class Project {
 
     public int getId() {
         return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public String getName() {

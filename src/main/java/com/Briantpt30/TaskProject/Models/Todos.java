@@ -1,9 +1,6 @@
 package com.Briantpt30.TaskProject.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,7 +13,8 @@ public class Todos {
     @NotNull
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
     private Task task;
 
     public Todos() {
@@ -27,6 +25,10 @@ public class Todos {
 
     public int getId() {
         return id;
+    }
+
+    public Task getTask() {
+        return task;
     }
 
     public String getTitle() {

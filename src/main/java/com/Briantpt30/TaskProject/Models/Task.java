@@ -20,15 +20,18 @@ public class Task {
     @NotNull
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "task_id")
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "task")
     private List<Todos> todos = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "task_id")
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "task")
     private List<Comments> comments = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
     private Project project;
 
 
@@ -43,6 +46,26 @@ public class Task {
 
     public int getId() {
         return id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public List<Todos> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<Todos> todos) {
+        this.todos = todos;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
     }
 
     public String getTitle() {

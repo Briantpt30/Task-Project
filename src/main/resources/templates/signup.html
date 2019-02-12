@@ -3,22 +3,22 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-<form method="post">
+<form method="post" th:object="${user}">
     <div class="form-group">
         <label class="col-form-label" th:for="fname">First Name</label>
-        <input type="text" class="form-control" placeholder="Harry" id="fname" th:field="${fname}">
+        <input type="text" class="form-control" placeholder="Harry" id="fname" th:field="*{fname}">
     </div>
     <div class="form-group">
         <label class="col-form-label" th:for="lname">Last Name</label>
-        <input type="text" class="form-control" placeholder="Potter" id="lname" th:field="${lname}">
+        <input type="text" class="form-control" placeholder="Potter" id="lname" th:field="*{lname}">
     </div>
     <div class="form-group">
         <label th:for="email">Email address</label>
-        <input type="email" th:field="${email}" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Hpotter@Hogwarts.edu">
+        <input type="email" th:field="*{email}" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Hpotter@Hogwarts.edu">
     </div>
     <div class="form-group">
         <label th:for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" th:field="${password}">
+        <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
     </div>
     <input type="submit" class="btn btn-primary btn-lg" value="Signup!"/>
 

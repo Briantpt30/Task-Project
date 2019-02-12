@@ -1,9 +1,6 @@
 package com.Briantpt30.TaskProject.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,7 +15,8 @@ public class Comments {
     @Size(min = 3)
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
     private Task task;
 
     public Comments() {
@@ -29,6 +27,10 @@ public class Comments {
 
     public int getId() {
         return id;
+    }
+
+    public Task getTask() {
+        return task;
     }
 
     public String getComment() {
