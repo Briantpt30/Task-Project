@@ -1,7 +1,9 @@
 package com.Briantpt30.TaskProject.Models.data;
 
 import com.Briantpt30.TaskProject.Models.Comments;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CommentsDao extends CrudRepository<Comments, Integer> {
+@Repository("commentsRepository")
+public interface CommentsDao extends JpaRepository<Comments, Integer> {
 }

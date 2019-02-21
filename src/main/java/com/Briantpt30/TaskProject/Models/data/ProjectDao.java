@@ -1,9 +1,11 @@
 package com.Briantpt30.TaskProject.Models.data;
 
 import com.Briantpt30.TaskProject.Models.Project;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProjectDao extends CrudRepository<Project, Integer> {
+@Repository("projectRepository")
+public interface ProjectDao extends JpaRepository<Project, Integer> {
 
     Project findFirstById(int id);
 }

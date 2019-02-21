@@ -3,9 +3,12 @@ package com.Briantpt30.TaskProject.Models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -14,17 +17,20 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @NotNull
+    @NotEmpty(message = "Please provide your name")
     private String fname;
 
-    @NotNull
+    @NotEmpty(message = "Please provide your last name")
     private String lname;
 
-    @NotNull
+    @NotEmpty(message = "Please provide an email")
+    @Email(message = "Please provide a valid email")
     private String email;
 
-    @NotNull
+    @NotEmpty(message = "Please provide your password")
     private String password;
+    @Column(name = "active")
+    private int active;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -39,18 +45,21 @@ public class User {
             mappedBy = "users")
     private List<Group> groups = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     public User() {
     }
-    public User(String fname, String lname, String email, String password){
-        this.fname = fname;
-        this.lname = lname;
-        this.email = email;
-        this.password = password;
 
-    }
-    public User(String email, String password){
-        this.email = email;
-        this.password = password;
+
+    public User(User user) {
+        this.email = user.getEmail();
+        this.fname = user.getFname();
+        this.lname = user.getLname();
+        this.roles = user.getRoles();
+        this.id = user.getId();
+        this.password = user.getPassword();
     }
 
     public int getId() {
@@ -103,5 +112,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

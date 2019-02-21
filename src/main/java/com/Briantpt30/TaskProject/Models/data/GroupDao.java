@@ -1,7 +1,12 @@
 package com.Briantpt30.TaskProject.Models.data;
 
 import com.Briantpt30.TaskProject.Models.Group;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GroupDao extends CrudRepository<Group, Integer> {
+import javax.transaction.Transactional;
+
+@Repository("groupRepository")
+@Transactional
+public interface GroupDao extends JpaRepository<Group, Integer> {
 }

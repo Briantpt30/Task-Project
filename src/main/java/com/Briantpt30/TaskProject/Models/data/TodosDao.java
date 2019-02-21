@@ -1,7 +1,9 @@
 package com.Briantpt30.TaskProject.Models.data;
 
 import com.Briantpt30.TaskProject.Models.Todos;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TodosDao extends CrudRepository<Todos, Integer> {
+@Repository("todosRepository")
+public interface TodosDao extends JpaRepository<Todos, Integer> {
 }

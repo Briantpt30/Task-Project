@@ -1,19 +1,21 @@
 package com.Briantpt30.TaskProject.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "groups")
 public class Group {
 
     @Id
     @GeneratedValue
     private int id;
 
-    @NotNull
+    @NotEmpty
     @Size(max=30)
     private String name;
 
@@ -27,13 +29,7 @@ public class Group {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
             })
-    @JoinTable(name = "user_groups",
-        joinColumns = {@JoinColumn(name = "group_id") },
-        inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users = new ArrayList<>();
-
-
-
 
     public Group() {
     }
