@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 //@RequestMapping("/login")
@@ -29,20 +31,22 @@ public class LoginController {
         return "login";
     }
 
-    //@RequestMapping(value = "", method = RequestMethod.POST)
+    // @RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping("/login")
     public String indexPost(Model model, @ModelAttribute User logUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             System.out.println("sdadaddadsd");
-           return "signup";
+           return "login";
         }
+        User user = userDao.findByEmail(logUser.getEmail());
        model.addAttribute("user", logUser);
-        System.out.println(logUser.getEmail());
-        System.out.println(logUser.getPassword());
-        System.out.println(logUser.getId());
-        securityService.autologin(logUser.getEmail(), logUser.getPassword());
+       System.out.println("It Worked!!!!!!!!!!!!");
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println(user.getId());
+        securityService.autologin(user.getEmail(), user.getPassword());
 
-        return "redirect:userpage/" + logUser.getId();
+        return "redirect:userpage/" + user.getId();
     }
 
 

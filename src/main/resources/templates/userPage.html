@@ -6,15 +6,45 @@
 <h2>My Projects</h2>
 <hr />
 <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">MyProjects</div>
+        <h3 class="card-header">MyProjects</h3>
         <div class="card-body" th:each="project : ${user.projects}">
-            <a th:href="@{/projectpage/{projectId}(projectId=${project.id})}" role="button">
-            <p class="card-text" th:text="${project.name}"></p>
-            </a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a th:href="@{/projectpage/{projectId}(projectId=${project.id})}" th:text="${project.name}"></a>
+                </li>
+            </ul>
+        </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="exampleModal">
+    Launch demo modal
+</button>
+
+<div class="modal" id="exampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form role="form" th:action="@{/createProject}" method="post" th:object="${project}">
+
+            <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-form-label" th:for="name">Project Name</label>
+                        <input type="text" class="form-control" placeholder="Project Name" id="name" th:field="*{name}">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+            </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
-
 </div>
 
 
@@ -30,6 +60,12 @@
     </div>
 </div>
 </a>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 
 </body>
 </html>

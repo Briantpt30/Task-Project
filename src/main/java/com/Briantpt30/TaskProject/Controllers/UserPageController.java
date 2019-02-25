@@ -1,6 +1,9 @@
 package com.Briantpt30.TaskProject.Controllers;
 
+import com.Briantpt30.TaskProject.Models.Project;
 import com.Briantpt30.TaskProject.Models.User;
+import com.Briantpt30.TaskProject.Models.data.GroupDao;
+import com.Briantpt30.TaskProject.Models.data.ProjectDao;
 import com.Briantpt30.TaskProject.Models.data.UserDao;
 import com.Briantpt30.TaskProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +22,34 @@ public class UserPageController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private ProjectDao projectDao;
+
+    @Autowired
+    private GroupDao groupDao;
+
     //@PreAuthorize("hasAnyRole('USER')")
     //@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @GetMapping("/{userId}")
     public String index(Model model, @PathVariable int userId) {
-        System.out.println("Aquaman");
         model.addAttribute("title", "MyProjects" );
         User user = userService.findById(userId);
-        System.out.println(user.getId());
+        model.addAttribute(new Project());
         model.addAttribute("user", user);
+        model.addAttribute("userId", user.getId());
         model.addAttribute("projects", user.getProjects());
-        System.out.println(user.getProjects());
         model.addAttribute("groups", user.getGroups());
 
         return "userPage";
 
     }
+
+//    @GetMapping("/{userId}/project")
+//    public String createProject(Model model){
+//        model.addAttribute("title", "Create New Project");
+//        model.addAttribute(new Project());
+//
+//        return "create/project";
+//
+//    }
 }
