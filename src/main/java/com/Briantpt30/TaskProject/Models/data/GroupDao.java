@@ -9,4 +9,6 @@ import javax.transaction.Transactional;
 @Repository("groupRepository")
 @Transactional
 public interface GroupDao extends JpaRepository<Group, Integer> {
+
+    Group findFirstById(int id);
 }

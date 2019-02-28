@@ -5,35 +5,121 @@
 <nav th:replace="fragments :: nav"></nav>
 <h1 th:text="${title}"></h1>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="exampleModal">
-    Launch demo modal
-</button>
+<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+    <h3 class="card-header">MyProjects</h3>
+    <div class="card-body" th:each="task : ${project.tasks}">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <!-- Button trigger modal for task, create todos, create comments -->
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#${task.id}" th:text="${task.title}"></button>
+            </li>
+        </ul>
+        <!-- modal task, create todos, create comments -->
+        <div class="modal fade" id="${task.id}" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="${task.title}"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="col-sm-10">
+                            <h6>Description</h6>
+                            <p th:text="${task.description}"></p>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="custom-control custom-checkbox">
+                                <h6>Todos</h6>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                </div>
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                <label class="custom-control-label" for="customCheck1">Todos</label>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <textarea rows="4" cols="40" name="comment"  placeholder="New Comment..."></textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" name="projectId" th:value="*{task.id}"/>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger"
+                                data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary" form="taskForm">
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="modal" id="exampleModal">
-    <div class="modal-dialog" role="document">
+    </div>
+</div>
+
+
+
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+    Create a Task
+</button>
+<!-- Modal create task -->
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
+            <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Create Task</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- Modal Body -->
             <div class="modal-body">
-                <form role="form" th:action="@{/createProject}" method="post">
-                    <div class="form-group row">
-                        <label class="col-form-label" th:for="name">Project Name</label>
-                        <input type="text" class="form-control" placeholder="Project Name" id="name">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                <form class="form-horizontal" role="form" id="taskForm" th:action="@{/createTask/{projectId}(projectId=${project.id})}" method="post" th:object="${task}">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label"
+                                for="task">Task</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="task" placeholder="Task" th:field="*{title}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                         <textarea rows="4" cols="40" name="comment" form="taskForm" placeholder="Enter Description" th:field="*{description}"></textarea>
+                        </div>
                     </div>
                 </form>
             </div>
+            <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" class="btn btn-primary" form="taskForm">
+                    Create Task
+                </button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

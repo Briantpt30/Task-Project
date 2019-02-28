@@ -1,5 +1,6 @@
 package com.Briantpt30.TaskProject.Controllers;
 
+import com.Briantpt30.TaskProject.Models.Group;
 import com.Briantpt30.TaskProject.Models.Project;
 import com.Briantpt30.TaskProject.Models.User;
 import com.Briantpt30.TaskProject.Models.data.GroupDao;
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/userpage")
 public class UserPageController {
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     UserService userService;
@@ -34,8 +40,11 @@ public class UserPageController {
     public String index(Model model, @PathVariable int userId) {
         model.addAttribute("title", "MyProjects" );
         User user = userService.findById(userId);
+        model.addAttribute(new Group());
         model.addAttribute(new Project());
+        List<User> users = userDao.findAll();
         model.addAttribute("user", user);
+        model.addAttribute("users", users);
         model.addAttribute("userId", user.getId());
         model.addAttribute("projects", user.getProjects());
         model.addAttribute("groups", user.getGroups());

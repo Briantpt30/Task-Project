@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository("taskRepository")
 public interface TaskDao extends JpaRepository<Task, Integer> {
+
+    Task findAllByProject(int projectId);
 }

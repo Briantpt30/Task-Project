@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository("commentsRepository")
 public interface CommentsDao extends JpaRepository<Comments, Integer> {
+
+    Comments findAllByTask(int taskId);
 }

@@ -3,9 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-<h2>My Projects</h2>
-<hr />
-<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
         <h3 class="card-header">MyProjects</h3>
         <div class="card-body" th:each="project : ${user.projects}">
             <ul class="list-group list-group-flush">
@@ -16,32 +14,44 @@
         </div>
 </div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="exampleModal">
-    Launch demo modal
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+    Create Project
 </button>
-
-<div class="modal" id="exampleModal">
-    <div class="modal-dialog" role="document">
+<!-- Modal create task -->
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
+            <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Create Project</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form role="form" th:action="@{/createProject}" method="post" th:object="${project}">
-
+            <!-- Modal Body -->
             <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-form-label" th:for="name">Project Name</label>
-                        <input type="text" class="form-control" placeholder="Project Name" id="name" th:field="*{name}">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                <form class="form-horizontal" role="form" id="projectForm" th:action="@{/createProject}" method="post" th:object="${project}">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label"
+                                for="project">Project</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="project" placeholder="Project Name" th:field="*{name}"/>
+                        </div>
                     </div>
-            </div>
-            </form>
 
+                </form>
+            </div>
+            <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" class="btn btn-primary" form="projectForm">
+                    Create Project
+                </button>
             </div>
         </div>
     </div>
@@ -49,17 +59,68 @@
 
 
 
-<br>
-<h2>Group Projects</h2>
-<hr />
-<a href="#" role="button">
-
-<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
-    <div class="card-body">
-        <h4 class="card-title">Group Project 1</h4>
+<div class="card text-white bg-info mb-3" style="max-width: 20rem;" id="groupcard">
+    <h3 class="card-header">MyGroups</h3>
+    <div class="card-body" th:each="group : ${user.groups}">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a th:href="@{/grouppage/{groupId}(groupId=${group.id})}" th:text="${group.name}"></a>
+            </li>
+        </ul>
     </div>
 </div>
-</a>
+
+<!-- Button trigger modal -->
+<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#creategroupmodal">
+    Create Group
+</button>
+<!-- Modal create task -->
+<div class="modal fade" id="creategroupmodal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Create Group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="groupForm" th:action="@{/createGroup}" method="post" th:object="${group}">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label"
+                                for="project">Group</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="group" placeholder="Group Name" th:field="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="users">Add User</label>
+                        <select multiple="" class="form-control" id="users" form="groupForm" th:field="*{users}">
+                            <option th:each="user : ${users}"
+                                    th:value="${user.id}"
+                                    th:text="${user.email}"></option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" class="btn btn-primary" form="groupForm">
+                    Create Project
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

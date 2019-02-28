@@ -52,6 +52,10 @@ public class Task {
         return project;
     }
 
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     public List<Todos> getTodos() {
         return todos;
     }
