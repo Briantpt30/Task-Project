@@ -38,6 +38,10 @@ public class Group {
         this.name = name;
     }
 
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
     public int getId() {
         return id;
     }

@@ -3,7 +3,23 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+<br>
+<br>
+<!-- Button trigger modal -->
+<div class="createbutton">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+        Create Project
+    </button>
+
+<br>
+    <br>
+<!-- Button trigger modal -->
+
+    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#creategroupmodal" id="createbutton">
+        Create Group
+    </button>
+</div>
+<div class="card text-white bg-success mb-3" style="max-width: 20rem;" id="projectcard">
         <h3 class="card-header">MyProjects</h3>
         <div class="card-body" th:each="project : ${user.projects}">
             <ul class="list-group list-group-flush">
@@ -14,9 +30,7 @@
         </div>
 </div>
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
-    Create Project
-</button>
+
 <!-- Modal create task -->
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -70,10 +84,7 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#creategroupmodal">
-    Create Group
-</button>
+
 <!-- Modal create task -->
 <div class="modal fade" id="creategroupmodal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -115,7 +126,7 @@
                     Close
                 </button>
                 <button type="submit" class="btn btn-primary" form="groupForm">
-                    Create Project
+                    Create Group
                 </button>
             </div>
         </div>
@@ -125,6 +136,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../src/main/resources/static/Js/checkbox.js"></script>
 
 
 

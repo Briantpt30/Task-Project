@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface TaskDao extends JpaRepository<Task, Integer> {
 
     Task findAllByProject(int projectId);
+    Task findFirstById(int taskId);
+    Task findAllByCompleteIsNotNull();
+    Task findAllByCompleteIsNull();
 }

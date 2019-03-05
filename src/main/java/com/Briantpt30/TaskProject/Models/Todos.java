@@ -31,6 +31,10 @@ public class Todos {
         return task;
     }
 
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
     public String getTitle() {
         return title;
     }

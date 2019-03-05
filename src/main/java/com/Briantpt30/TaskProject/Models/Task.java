@@ -20,6 +20,8 @@ public class Task {
     @NotNull
     private String description;
 
+    private int complete;
+
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "task")
@@ -86,5 +88,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getComplete() {
+        return complete;
+    }
+
+    public void setComplete(int complete) {
+        this.complete = complete;
     }
 }

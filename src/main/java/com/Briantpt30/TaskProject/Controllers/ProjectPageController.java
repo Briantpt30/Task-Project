@@ -42,7 +42,6 @@ public class ProjectPageController {
         model.addAttribute("title", project.getName());
         model.addAttribute("tasks", project.getTasks());
         model.addAttribute("projectId", project.getId());
-        System.out.println(project.getTasks());
 
         return "projectPage";
 

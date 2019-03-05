@@ -19,6 +19,10 @@ public class Comments {
     @JoinColumn(name = "task_id")
     private Task task;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comments() {
     }
     public Comments(String comment){
@@ -33,11 +37,23 @@ public class Comments {
         return task;
     }
 
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

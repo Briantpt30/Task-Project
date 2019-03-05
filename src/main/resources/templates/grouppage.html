@@ -5,6 +5,11 @@
 <body>
 <nav th:replace="fragments :: nav"></nav>
 <h1 th:text="${title}"></h1>
+<br>
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal" id="projectbuttongroup">
+    Create Project
+</button>
 <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
     <h3 class="card-header">Projects</h3>
     <div class="card-body" th:each="project : ${group.projects}">
@@ -16,15 +21,24 @@
     </div>
 </div>
 <br>
-<hr/>
-<ul class="list-group" th:each="user : ${group.users}">
-    <li class="list-group-item d-flex justify-content-between align-items-center" th:text="${user.email}">
-    </li>
-</ul>
+<h3>Group Members</h3>
+<table class="table table-hover" id="tableusers">
+    <thead>
+    <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tr class="table-info" th:each="user : ${group.users}">
+        <th scope="row" th:text="${user.fname}"></th>
+        <td th:text="${user.lname}"></td>
+        <td th:text="${user.email}"></td>
+    </tr>
+</table>
+
 <br>
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
-    Create Project
-</button>
+
 <!-- Modal create task -->
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,6 +78,11 @@
         </div>
     </div>
 </div>
+<script src="..\src/main/resources/static/Js/checkbox.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
